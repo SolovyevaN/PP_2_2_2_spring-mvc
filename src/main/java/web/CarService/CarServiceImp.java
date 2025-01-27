@@ -3,18 +3,23 @@ package web.CarService;
 import org.springframework.stereotype.Service;
 import web.Model.Car;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class CarServiceImp implements CarService {
-    @Override
-    public List<Car> listCar() {
-        return List.of(
-                new Car("Toyota", "Black", 2023),
-                new Car("BMW", "White", 2021),
-                new Car("Tesla", "Blue", 2019),
-                new Car("Opel", "Red", 2015),
-                new Car("Ford", "Grey", 2020)
-        );
+    private final List<Car> cars = Arrays.asList(
+            new Car("Toyota Camry", "White", 2020),
+            new Car("BMW X5", "Black", 2019),
+            new Car("Tesla Model 3", "Red", 2022),
+            new Car("Mercedes-Benz C-Class", "Silver", 2021),
+            new Car("Audi A6", "Blue", 2018)
+    );
+
+    public List<Car> listCar(int count) {
+        if (count >= cars.size()) {
+            return cars; // Возвращаем весь список, если count >= 5
+        }
+        return cars.subList(0, count); // Возвращаем указанное количество машин
     }
 }
